@@ -14,6 +14,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/styles/scss/_vars.scss";
 .btn {
   font-family: "Inter", sans-serif;
   cursor: pointer;
@@ -31,7 +32,7 @@ export default {
   //.btn.green
   &.green {
     color: #ffffff;
-    background: #7bae73;
+    background: $green-color;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 
@@ -41,8 +42,14 @@ export default {
     background: #eeeeee;
     box-shadow: none;
     color: #b4b4b4;
+    &:focus {
+      box-shadow: none;
+    }
   }
 
+  &:active {
+    background: darken($green-color, 10);
+  }
   &:focus {
     outline: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

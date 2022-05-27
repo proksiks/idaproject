@@ -1,12 +1,12 @@
 <template>
-  <Box class="card" v-if="info">
+  <Box class="card" v-if="img && title">
     <div class="card__img">
-      <img :src="info.img" :alt="info.img" />
+      <img :src="img" :alt="img" />
     </div>
     <div class="card__content">
-      <SubTitle>{{ info.title }}</SubTitle>
-      <p class="card__text">{{ info.text }}</p>
-      <div class="card__price">{{ info.price }} руб.</div>
+      <SubTitle>{{ title }}</SubTitle>
+      <p class="card__text">{{ text }}</p>
+      <div class="card__price">{{ price }} руб.</div>
     </div>
     <button class="card__delete" @click="$emit('delete')">
       <img src="/images/icons/delete.svg" alt="" />
@@ -17,7 +17,10 @@
 <script>
 export default {
   props: {
-    info: Object,
+    img: String,
+    title: String,
+    text: String,
+    price: String,
   },
 };
 </script>
