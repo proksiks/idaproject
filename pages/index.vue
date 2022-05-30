@@ -2,7 +2,16 @@
   <main class="main">
     <div class="head">
       <Title>Добавление товара</Title>
-      <div class="select">По умолчанию</div>
+      <div class="select">
+        <multiselect
+          v-model="value"
+          :options="options"
+          :searchable="false"
+          :close-on-select="false"
+          :show-labels="false"
+          placeholder="По умолчанию"
+        ></multiselect>
+      </div>
     </div>
     <div class="wrapper">
       <div class="left">
@@ -77,6 +86,14 @@ export default {
   data() {
     return {
       disabled: false,
+
+      value: "По умолчанию",
+      options: [
+        "По умолчанию",
+        "По наименованию",
+        "По цене (от меньшего к большему)",
+        "По цене (от большего к меньшему)",
+      ],
       cards: [
         {
           id: 1,
@@ -211,12 +228,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .head {
-  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
 }
 .add-card {
-  padding: 24px;
+  padding: 20px 24px 24px 24px;
   position: sticky;
   top: 16px;
   @media (max-width: 480px) {
@@ -225,6 +245,12 @@ export default {
   &__item {
     & + & {
       margin-top: 16px;
+    }
+    &:nth-child(3) {
+      margin-top: 8px;
+    }
+    &:nth-child(4) {
+      margin-top: 10px;
     }
   }
   &__btn {
@@ -259,15 +285,91 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-.item {
-  &::v-deep {
-    transition: all 0.6s ease;
+.multiselect {
+  min-width: 122px;
+  width: 100%;
+  min-height: 38px;
+  &__tags {
+    display: flex;
+    align-items: center;
+    padding: 10px 26px 11px 16px;
+    background: #fffefb;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    min-height: auto;
   }
-}
-.head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  &__single {
+    padding: 0;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #b4b4b4;
+    min-height: auto;
+    background: #fffefb;
+  }
+  &__select {
+    width: 38px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    &::before {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border: 1px solid #b4b4b4;
+      margin: 0;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &::after {
+      content: "";
+      background: #ffffff;
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      margin: 0;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -90%) rotate(45deg);
+    }
+  }
+  &__input {
+    padding: 0;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #b4b4b4;
+    background: #fffefb;
+    &::placeholder {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
+  }
+  &__option {
+    padding: 5px;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #b4b4b4;
+    background: #fffefb;
+    min-height: auto;
+    &--highlight {
+      background: #b8b5ae;
+      color: #ffffff;
+    }
+  }
+  &__placeholder {
+    padding: 0;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #b4b4b4;
+    background: #fffefb;
+    min-height: auto;
+  }
 }
 
 // animation cards

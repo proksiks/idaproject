@@ -41,7 +41,7 @@ export default {
   //.card__img
   &__img {
     position: relative;
-    padding-bottom: 60.1%;
+    padding-bottom: 60.9%;
     background-color: #c7c7c7;
     border-radius: 4px 4px 0 0;
     overflow: hidden;

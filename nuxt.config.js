@@ -27,7 +27,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/vulidate.js'
+    '~/plugins/vulidate.js',
+    '~/plugins/multiselect.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
