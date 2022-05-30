@@ -7,8 +7,8 @@
       :placeholder="placeholder"
       :required="required"
       :name="name"
-      v-bind:value="value"
-      v-on:input="send"
+      :value="value"
+      @input="send"
     />
     <span :class="{ 'custom-input__error-text': errorText }">
       {{ errorText }}

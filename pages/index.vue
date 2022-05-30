@@ -15,10 +15,10 @@
             :error="$v.form.fullname.$error"
             v-model="$v.form.fullname.$model"
             error-text="Поле является обязательным"
+            @send="handlyInput"
           />
           <CustomTextarea
             class="add-card__item"
-            required
             title="Описание товара"
             placeholder="Введите описание товара"
           />
@@ -75,6 +75,12 @@ export default {
     return {
       disabled: false,
       name: "",
+      card: {
+        img: "",
+        title: "",
+        text: "",
+        price: "",
+      },
       cards: [
         {
           img: "/images/card/img.jpg",
