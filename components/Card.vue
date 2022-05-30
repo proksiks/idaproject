@@ -1,16 +1,18 @@
 <template>
-  <Box class="card" v-if="img && title">
-    <div class="card__img">
-      <img :src="img" :alt="img" />
+  <Box v-if="img && title">
+    <div class="card">
+      <div class="card__img">
+        <img :src="img" :alt="img" />
+      </div>
+      <div class="card__content">
+        <SubTitle>{{ title }}</SubTitle>
+        <p class="card__text">{{ text }}</p>
+        <div class="card__price">{{ price }} руб.</div>
+      </div>
+      <button class="card__delete" @click="$emit('delete')">
+        <img src="images/icons/delete.svg" alt="" />
+      </button>
     </div>
-    <div class="card__content">
-      <SubTitle>{{ title }}</SubTitle>
-      <p class="card__text">{{ text }}</p>
-      <div class="card__price">{{ price }} руб.</div>
-    </div>
-    <button class="card__delete" @click="$emit('delete')">
-      <img src="images/icons/delete.svg" alt="" />
-    </button>
   </Box>
 </template>
 
@@ -41,6 +43,8 @@ export default {
     position: relative;
     padding-bottom: 60.1%;
     background-color: #c7c7c7;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
     img {
       position: absolute;
       left: 0;

@@ -116,6 +116,14 @@ export default {
       line-height: inherit;
       color: #b4b4b4;
     }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
   }
 }
 </style>

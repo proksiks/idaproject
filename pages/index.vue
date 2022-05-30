@@ -92,6 +92,62 @@ export default {
           text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
           price: "10000",
         },
+        {
+          id: 3,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 4,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 5,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 6,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 7,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 8,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 9,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
+        {
+          id: 10,
+          img: "images/card/img.jpg",
+          title: "Наименование товара",
+          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+          price: "10000",
+        },
       ],
 
       form: {
@@ -104,7 +160,7 @@ export default {
         title: false,
         link: false,
         price: false,
-        text: true,
+        text: false,
       },
     };
   },
@@ -121,7 +177,7 @@ export default {
           serverValid: () => !this.errors.link,
         },
         text: {
-          serverValid: () => !this.errors.link,
+          serverValid: () => !this.errors.text,
         },
         price: {
           required,
@@ -205,7 +261,7 @@ export default {
 }
 .item {
   &::v-deep {
-    transition: box-shadow 0.6s ease, transform 0.6s ease, opacity 0.6s ease;
+    transition: all 0.6s ease;
   }
 }
 .head {
@@ -214,19 +270,21 @@ export default {
   justify-content: space-between;
 }
 
+// animation cards
 .card-enter,
-.player-leave-to {
+.card-leave-to {
   opacity: 0;
 }
 .card-enter {
-  transform: scale(1);
+  transform: translateY(10%);
 }
 .card-leave-to {
-  transform: scale(0) translateY(-100%);
+  transform: translateY(-100%);
 }
 .card-leave-active {
-  width: 33%;
   position: absolute;
+  width: 32%;
+  z-index: 0;
   @media (max-width: 1023px) {
     width: 50%;
   }
