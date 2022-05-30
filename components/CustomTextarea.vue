@@ -5,6 +5,7 @@
       rows="6"
       class="custom-textarea__textarea"
       :placeholder="placeholder"
+      @input="send"
     ></textarea>
   </div>
 </template>
@@ -15,6 +16,11 @@ export default {
     title: String,
     required: Boolean,
     placeholder: String,
+  },
+  methods: {
+    send: function (e) {
+      this.$emit("input", e.target.value);
+    },
   },
 };
 </script>

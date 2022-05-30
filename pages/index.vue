@@ -12,15 +12,15 @@
             required
             title="Наименование товара"
             placeholder="Введите наименование товара"
-            :error="$v.form.fullname.$error"
-            v-model="$v.form.fullname.$model"
+            :error="$v.form.title.$error"
+            v-model="$v.form.title.$model"
             error-text="Поле является обязательным"
-            @send="handlyInput"
           />
           <CustomTextarea
             class="add-card__item"
             title="Описание товара"
             placeholder="Введите описание товара"
+            v-model="$v.form.text.$model"
           />
           <CustomInput
             class="add-card__item"
@@ -34,6 +34,7 @@
           <CustomInput
             class="add-card__item"
             required
+            type="number"
             title="Цена товара"
             placeholder="Введите цену"
             :error="$v.form.price.$error"
@@ -51,16 +52,18 @@
         </Box>
       </div>
       <div class="right">
-        <div class="items">
+        <transition-group class="items" name="card" tag="div">
           <Card
+            class="item"
             v-for="card in cards"
             :key="card.id"
             :img="card.img"
             :title="card.title"
             :text="card.text"
             :price="formatPrice(card.price)"
+            @delete="deleteItem(card.id)"
           />
-        </div>
+        </transition-group>
       </div>
     </div>
     <Card />
@@ -74,94 +77,17 @@ export default {
   data() {
     return {
       disabled: false,
-      name: "",
-      card: {
-        img: "",
-        title: "",
-        text: "",
-        price: "",
-      },
       cards: [
         {
-          img: "/images/card/img.jpg",
+          id: 1,
+          img: "images/card/img.jpg",
           title: "Наименование товара",
           text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
           price: "10000",
         },
         {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
-          title: "Наименование товара",
-          text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          img: "/images/card/img.jpg",
+          id: 2,
+          img: "images/card/img.jpg",
           title: "Наименование товара",
           text: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
           price: "10000",
@@ -169,27 +95,32 @@ export default {
       ],
 
       form: {
-        fullname: "",
+        title: "",
         link: "",
+        text: "",
         price: "",
       },
       errors: {
-        fullname: false,
+        title: false,
         link: false,
         price: false,
+        text: true,
       },
     };
   },
   validations() {
     return {
       form: {
-        fullname: {
+        title: {
           required,
           minLength: minLength(4),
-          serverValid: () => !this.errors.fullname,
+          serverValid: () => !this.errors.title,
         },
         link: {
           required,
+          serverValid: () => !this.errors.link,
+        },
+        text: {
           serverValid: () => !this.errors.link,
         },
         price: {
@@ -200,8 +131,22 @@ export default {
     };
   },
   methods: {
-    addItem() {
-      console.log("123");
+    addItem: function () {
+      const card = {
+        id: this.cards.length + 1,
+        img: this.form.link,
+        title: this.form.title,
+        text: this.form.text,
+        price: this.form.price,
+      };
+      this.cards.push(card);
+    },
+    deleteItem: function (cardId) {
+      let cardToRemove = this.cards.find((card) => {
+        return card.id === cardId;
+      });
+      let cardIndex = this.cards.indexOf(cardToRemove);
+      this.cards.splice(cardIndex, 1);
     },
     formatPrice(value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -210,7 +155,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .head {
   margin-bottom: 16px;
 }
@@ -247,6 +192,7 @@ export default {
   min-width: 240px;
 }
 .items {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
@@ -257,9 +203,35 @@ export default {
     grid-template-columns: 1fr;
   }
 }
+.item {
+  &::v-deep {
+    transition: box-shadow 0.6s ease, transform 0.6s ease, opacity 0.6s ease;
+  }
+}
 .head {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card-enter,
+.player-leave-to {
+  opacity: 0;
+}
+.card-enter {
+  transform: scale(1);
+}
+.card-leave-to {
+  transform: scale(0) translateY(-100%);
+}
+.card-leave-active {
+  width: 33%;
+  position: absolute;
+  @media (max-width: 1023px) {
+    width: 50%;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 </style>

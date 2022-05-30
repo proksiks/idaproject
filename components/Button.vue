@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="{ disabled, green }" @click="$emit('click')">
+  <button class="btn" :class="{ disabled, green }" :disabled="disabled" @click="$emit('click')">
     <slot />
   </button>
 </template>
@@ -38,12 +38,16 @@ export default {
 
   //.btn.disabled
   &.disabled {
+    pointer-events: none;
     cursor: auto;
     background: #eeeeee;
     box-shadow: none;
     color: #b4b4b4;
     &:focus {
       box-shadow: none;
+    }
+    &:active {
+      background: #eeeeee;
     }
   }
 

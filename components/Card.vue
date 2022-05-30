@@ -9,7 +9,7 @@
       <div class="card__price">{{ price }} руб.</div>
     </div>
     <button class="card__delete" @click="$emit('delete')">
-      <img src="/images/icons/delete.svg" alt="" />
+      <img src="images/icons/delete.svg" alt="" />
     </button>
   </Box>
 </template>
@@ -40,6 +40,7 @@ export default {
   &__img {
     position: relative;
     padding-bottom: 60.1%;
+    background-color: #c7c7c7;
     img {
       position: absolute;
       left: 0;

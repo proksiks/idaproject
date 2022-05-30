@@ -3,11 +3,11 @@
     <div class="custom-input__title" :class="{ required }">{{ title }}</div>
     <input
       class="custom-input__input"
-      type="text"
       :placeholder="placeholder"
       :required="required"
       :name="name"
       :value="value"
+      :type="type"
       @input="send"
     />
     <span :class="{ 'custom-input__error-text': errorText }">
@@ -25,6 +25,10 @@ export default {
     placeholder: String,
     value: String,
     errorText: String,
+    type: {
+      type: String,
+      default: "text",
+    },
     error: Boolean,
   },
   methods: {
